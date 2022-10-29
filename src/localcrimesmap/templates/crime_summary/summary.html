@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block title %} Crime Summary {% endblock title %}
+
+{% block content %}
+    <form action="{% url 'crimesummary' %}" method="post">
+        {% csrf_token %}
+        {{ form | crispy}} 
+        <input type="submit" value="Submit" class="btn btn-primary"> 
+    </form>
+
+    <Script src="{% static 'js/getlocation.js' %}"></script>
+    <Script src="{% static 'js/crime_summary.js' %}"></script>
+{% endblock content %}

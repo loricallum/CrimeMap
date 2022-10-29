@@ -1,0 +1,63 @@
+{# Load the tag library #}
+{% load bootstrap4 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="A web application to view local UK crimes">
+  <meta name="author" content="Callum Houghton">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <title>{% block title %}{% endblock %}</title>
+  <link rel="App Icon" type="image/png" href="{%static 'favicon.ico' %}"/>
+  
+
+   {% block styling %}
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
+        <link rel="stylesheet" href="{%static 'css/navbar.css' %}">
+    {% endblock styling %}
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top gradient-custom">
+        <div class="container">
+        <a class="navbar-brand" href="{% url 'map' %}">Local Crimes Map</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item {{ map }}">
+                        <a class="nav-link" href="{% url 'map' %}">Map View</a>
+                </li>
+                <li class="nav-item {{ crime_summary }}">
+                        <a class="nav-link" href="{% url 'crimesummary' %}">Crime Summary Report</a>
+                </li>
+            </ul>
+        </div>
+        </div>
+    </nav>
+
+  <div class="container">
+    {% block content %}
+    {% endblock %}
+
+  </div>
+</body>
+</html>

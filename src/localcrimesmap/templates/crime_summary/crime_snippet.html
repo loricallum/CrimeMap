@@ -1,0 +1,25 @@
+{% load staticfiles %}
+
+{% if crime_list %}
+
+    <div class="list-group my-3" id="crimesList">
+        {% for crime in crime_list %}
+            <div class="list-group-item list-group-item-action flex-column align-items-start" 
+                 onclick="openStreetViewModule.OpenStreetView('{{crime.location.coords.1}},{{crime.location.coords.0}}')">
+                <div class="d-flex w-100 justify-content-between">
+                    <h3 class="mb-1">Crime ID: {{crime.api_id}}</h5>
+                    <small>{{crime.date | date:'M, Y'}}</small>
+                </div>
+                <h5 class="mb-4">{{crime.crime_type.crime_description}}</h5>
+                <h6 class="mb-1">{{crime.location_detail.crime_location_detail}}</h6>
+                <h6 class="mb-4">Coordinates: {{crime.location.coords.1}}, {{crime.location.coords.0}}</h6>
+                <h6>{{crime.resolution.resolution}}</h6>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    No crimes detected...
+{% endif %}
+
+<Script src="{% static 'js/bootbox.all.min.js' %}"></script>
+<Script src="{% static 'js/streetview_open.js' %}"></script>

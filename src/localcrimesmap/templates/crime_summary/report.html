@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %} Crime Report {% endblock title %}
+
+{% block content %}
+<ul class="nav nav-tabs my-3" role="tablist">
+    <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#crimetypes">Crime Types</a></li>
+    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#crimelist">Crime List</a></li>
+</ul>
+
+<div class="tab-content">
+    <div id="crimetypes" class="tab-pane container active my-3">
+        <ol class="list-group">
+            {% for crime_type, crime_amount in crime_type_list %}
+            <li class="list-group-item">{{ crime_type }} : {{crime_amount}} </li>
+            {% endfor %}
+        </ol>
+    </div>
+
+    <div id="crimelist" class="tab-pane container fade">
+        <select class="custom-select" id="crimetype-select">
+            <option selected disabled>Filter by Crime Type...</option>
+            {% for crime_type,crime_amount in crime_type_list %}
+                <option>{{ crime_type }}</option>
+            {% endfor %}
+        </select>
+        {% include "crime_summary/crime_snippet.html" with crime_list=detected_crimes %}
+    </div>
+</div>
+
+<Script src="{% static 'js/report.js' %}"></script>
+
+{% endblock content %}

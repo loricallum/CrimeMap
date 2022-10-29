@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load leaflet_tags %}
+
+{% block title %} Map {% endblock title %}
+
+{% block content %}
+    {% leaflet_js %}
+    {% leaflet_css %}
+    <div id="date-select-container">
+        <select type="text" id="dateSelect" onchange="mapModule.refreshAndLoadCrimes()" class="form-control">
+        {% for month in monthIntervals %}
+            <option>{{month}}</option>
+        {% endfor %}
+        </select>
+    </div>
+
+    <div id="map-container">
+        {% leaflet_map "crimemap" callback="mapModule.initMap"%}
+    </div>
+    <Script src="{% static 'js/getlocation.js' %}"></script>
+    <Script src="{% static 'js/map.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
+
+{% endblock content %}

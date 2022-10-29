@@ -1,0 +1,36 @@
+{
+  "addons": [
+    "heroku-postgresql"
+  ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/timanovsky/subdir-heroku-buildpack"
+    },
+    {
+      "url": "heroku/python"
+    }
+  ],
+  "env": {
+    "BUILD_WITH_GEO_LIBRARIES": {
+      "required": true
+    },
+    "DJANGODEBUG": {
+      "required": true
+    },
+    "PROJECT_PATH": {
+      "required": true
+    },
+    "SECRETKEY": {
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "name": "Local-Crimes-Map",
+  "scripts": {
+  },
+  "stack": "heroku-18"
+}
